@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :lives, :name
+  attr_reader :lives, :name
 
   def initialize(name)
     @name = name
@@ -12,7 +12,19 @@ class Player
 
   def dead?
     @lives == 0
+  end
 
+  def new_question
+    new_question = Question.new
+    new_question.ask_question(name)
+    print "> "
+    answer = $stdin.gets.chomp.to_i
 
-  
+    if answer == new_question.answer
+      puts "Correct! Good Job"
+    else
+      puts "Wrong! You lose a life"
+      take_life
+    end
+  end
 end

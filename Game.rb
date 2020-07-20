@@ -1,26 +1,40 @@
 class Game
+  attr_reader :player1, :player2
+
   def initialize
     @player1 = Player.new('Player 1')
     @player2 = Player.new('Player 2')
-    @question
   end
 
-  def question
-    
+
+  def start
+    puts "-----Welcome to a New Game #{player1.name} and #{player2.name}-----"
+    turn
   end
 
   def turn 
+    player1.new_question
+    check_score
+    puts "Player 1: #{player1.lives}/3 vs Player 2: #{player2.lives}/3"
     puts "----New Turn----"
-
-   
-
-    print "> "
-    answer = $stdin.gets.chomp
-    puts @current_turn, @question
-
+    player2.new_question
+    check_score
+    puts "Player 1: #{player1.lives}/3 vs Player 2: #{player2.lives}/3"
+    puts "----New Turn----"
+    turn
   end
 
-end
+  def check_score
+    if @player1.dead?
+      winner(@player2)
+    elsif @player2.dead?
+      winner(@player1)
+    end
+  end
 
-game1 = Game.new
-game1.turn
+  def winner(player)
+    puts "#{player.name} wins the Game! with the score of #{player.lives}/3"
+    puts "✨GAME OVER✨"
+    exit(0)
+  end
+end
