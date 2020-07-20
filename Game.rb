@@ -2,8 +2,12 @@ class Game
   attr_reader :player1, :player2
 
   def initialize
-    @player1 = Player.new('Player 1')
-    @player2 = Player.new('Player 2')
+    puts "Player 1 Enter your name: "
+    p1 =  $stdin.gets.chomp.to_s
+    @player1 = Player.new(p1)
+    puts "Player 2 Enter your name: "
+    p2 =  $stdin.gets.chomp.to_s
+    @player2 = Player.new(p2)
   end
 
 
@@ -15,11 +19,11 @@ class Game
   def turn 
     player1.new_question
     check_score
-    puts "Player 1: #{player1.lives}/3 vs Player 2: #{player2.lives}/3"
+    puts "#{player1.name}: #{player1.lives}/3 vs #{player2.name}: #{player2.lives}/3"
     puts "----New Turn----"
     player2.new_question
     check_score
-    puts "Player 1: #{player1.lives}/3 vs Player 2: #{player2.lives}/3"
+    puts "#{player1.name}: #{player1.lives}/3 vs #{player2.name}: #{player2.lives}/3"
     puts "----New Turn----"
     turn
   end
