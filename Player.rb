@@ -17,13 +17,13 @@ class Player
   def new_question
     new_question = Question.new
     new_question.ask_question(name)
-    print "> "
+    print "➡️ "
     answer = $stdin.gets.chomp.to_i
 
     if answer == new_question.answer
-      puts "Correct! Good Job"
+      puts "✅ Correct! ✅"
     else
-      puts "Wrong! You lose a life"
+      puts "❌ Wrong! You lose a life ❌"
       take_life
     end
   end
